@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>English Speaking Report | Engineering & AI Discussion</title>
+  <style>
+    :root {
+      --ink: #1d2928;
+      --muted: #687975;
+      --line: #d7e2dc;
+      --paper: #f3f6f1;
+      --white: #fcfdf9;
+      --mint: #c9e8d3;
+      --green: #4f9c6d;
+      --coral: #e96f58;
+      --navy: #263c50;
+      --shadow: rgba(38, 60, 80, .08);
+      --sans: "Avenir Next", "Noto Sans KR", sans-serif;
+      --mono: "SFMono-Regular", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.6; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 56px 34px 72px; }
+    .report-header { display: flex; justify-content: space-between; gap: 32px; align-items: flex-start; padding-bottom: 42px; border-bottom: 1px solid var(--line); }
+    .eyebrow, .label { color: var(--coral); font: 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow { margin: 0 0 18px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 700px; margin-bottom: 18px; font-size: clamp(38px, 6vw, 72px); line-height: 1.02; letter-spacing: -.065em; font-weight: 700; }
+    h1 em { color: var(--coral); font-family: Georgia, serif; font-weight: 400; }
+    .subtitle { max-width: 650px; margin-bottom: 0; color: var(--muted); font-size: 15px; }
+    .header-meta { min-width: 180px; padding-top: 10px; color: var(--muted); font: 10px/1.8 var(--mono); text-align: right; text-transform: uppercase; }
+    .header-meta strong { display: block; color: var(--ink); font-size: 12px; font-weight: 500; }
+    section { padding: 40px 0; border-bottom: 1px solid var(--line); }
+    .section-heading { display: flex; justify-content: space-between; gap: 22px; align-items: baseline; margin-bottom: 24px; }
+    h2 { margin-bottom: 0; font-size: 26px; line-height: 1.15; letter-spacing: -.05em; }
+    h3 { margin-bottom: 8px; font-size: 17px; letter-spacing: -.035em; }
+    .confidence { color: var(--green); font: 11px var(--mono); }
+    .snapshot { display: grid; grid-template-columns: 1.25fr .75fr; gap: 18px; }
+    .snapshot-card, .practice-card, .strength-card { background: var(--white); border: 1px solid var(--line); box-shadow: 9px 9px 0 var(--shadow); }
+    .snapshot-card { padding: 24px; }.snapshot-card.primary { color: white; background: var(--navy); border-color: var(--navy); }.snapshot-card.primary .label, .snapshot-card.primary .muted { color: var(--mint); }
+    .snapshot-card p { margin-bottom: 0; }.snapshot-card strong { display: block; margin: 8px 0 10px; font-size: 25px; letter-spacing: -.05em; }.muted { color: var(--muted); font-size: 13px; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 18px; background: var(--line); border: 1px solid var(--line); }.fact { padding: 17px; background: var(--white); }.fact .label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 9px; }.fact strong { display: block; margin: 0; font-size: 16px; }
+    .score-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--line); font-size: 13px; }.score-table th, .score-table td { padding: 15px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }.score-table th { color: var(--muted); font: 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; }.score-table tr:last-child td { border-bottom: 0; }.score { color: var(--coral); font: 16px var(--mono); white-space: nowrap; }.evidence { color: var(--muted); }.evidence strong { color: var(--ink); font-weight: 600; }.tag { display: inline-block; padding: 4px 7px; color: var(--green); background: #e7f3e9; font: 9px var(--mono); white-space: nowrap; }
+    .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }.strength-card { padding: 22px; }.strength-card p { margin-bottom: 0; color: var(--muted); font-size: 13px; }.strength-number { color: var(--coral); font: 11px var(--mono); }
+    .improvement { display: grid; gap: 16px; }.improvement-card { padding: 22px; background: #edf3ee; border-left: 3px solid var(--coral); }.improvement-card .label { display: block; margin-bottom: 11px; }.quote { margin: 0 0 8px; font: 14px var(--mono); }.alternative { margin: 0 0 7px; color: var(--green); font: 14px var(--mono); }.reason { margin: 0; color: var(--muted); font-size: 13px; }
+    .evidence-list { display: grid; gap: 12px; }.evidence-item { padding: 17px 19px; background: var(--white); border-left: 3px solid var(--mint); }.evidence-item blockquote { margin: 6px 0 5px; font: 13px/1.65 var(--mono); }.evidence-item p { margin: 0; color: var(--muted); font-size: 12px; }
+    .practice-card { display: grid; grid-template-columns: .75fr 1.25fr; gap: 24px; padding: 25px; }.practice-card h3 { font-size: 21px; }.practice-card p { color: var(--muted); font-size: 13px; }.practice-card p:last-child { margin-bottom: 0; }.practice-list { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; }.practice-list li + li { margin-top: 8px; }.success { margin-top: 18px; padding: 13px 15px; color: var(--ink); background: var(--mint); font-size: 13px; }
+    .question { margin: 0; padding: 24px; color: white; background: var(--navy); font-size: 21px; line-height: 1.35; letter-spacing: -.02em; }.question .label { display: block; margin-bottom: 12px; color: var(--mint); }
+    footer { display: flex; justify-content: space-between; gap: 20px; padding-top: 24px; color: var(--muted); font: 10px var(--mono); }
+    @media (max-width: 720px) { .page { padding: 32px 18px 50px; }.report-header, .snapshot, .two-column, .practice-card { grid-template-columns: 1fr; display: grid; }.header-meta { text-align: left; }.facts { grid-template-columns: 1fr; }.score-table { display: block; overflow-x: auto; white-space: normal; }.score-table th, .score-table td { min-width: 120px; }.score-table th:nth-child(3), .score-table td:nth-child(3) { min-width: 260px; }.practice-card { gap: 10px; } footer { flex-direction: column; } }
+    @media print { body { background: white; }.page { max-width: none; padding: 20px; }.snapshot-card, .practice-card, .strength-card { box-shadow: none; }.report-header { padding-bottom: 22px; } section { padding: 24px 0; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="report-header">
+      <div>
+        <p class="eyebrow">ENGLISH SPEAKING REPORT / 01</p>
+        <h1>Engineering ideas,<br><em>clearly articulated.</em></h1>
+        <p class="subtitle">AI와 엔지니어링의 미래를 주제로 한 논의에서 나타난 영어 말하기 능력을 분석한 보고서입니다.</p>
+      </div>
+      <div class="header-meta"><strong>2026-09-08</strong>TEXT-BASED REVIEW<br>발음·억양 제외</div>
+    </header>
+
+    <section>
+      <div class="section-heading"><div><p class="label">01 / SNAPSHOT</p><h2>한눈에 보는 진단</h2></div><span class="confidence">CONFIDENCE / MEDIUM-HIGH</span></div>
+      <div class="snapshot">
+        <article class="snapshot-card primary"><p class="label">가장 큰 강점</p><strong>복잡한 관점을 논리적으로 전개해요.</strong><p class="muted">기술적 판단과 사회적·법적·상업적 책임을 연결해, 추상적인 주제를 구체적인 산업 사례로 설명했습니다.</p></article>
+        <article class="snapshot-card"><p class="label">가장 먼저 개선할 점</p><strong>고급 표현의 리듬과 압축</strong><p class="muted">문법 오류보다 긴 답변을 구두 토론에서 더 자연스럽게 전달하는 문장 길이와 강조점을 연습하면 좋습니다.</p></article>
+      </div>
+      <div class="facts"><div class="fact"><span class="label">OBSERVED SCOPE</span><strong>사용자 발화 5개</strong></div><div class="fact"><span class="label">PROVISIONAL CEFR</span><strong>B2–C1</strong></div><div class="fact"><span class="label">TEXT LIMIT</span><strong>발음은 평가 불가</strong></div></div>
+    </section>
+
+    <section>
+      <div class="section-heading"><div><p class="label">02 / SOURCE EVIDENCE</p><h2>입력 대화에서 확인한 근거</h2></div><span class="confidence">사용자 발화에서 직접 인용</span></div>
+      <div class="evidence-list">
+        <article class="evidence-item"><span class="label">ARGUMENT / RESPONSIBILITY</span><blockquote>“organizations will still need humans to define goals, evaluate risks, and assume accountability for critical outcomes.”</blockquote><p>AI의 능력과 조직의 책임을 구분해 추상적인 주장을 구체적인 판단 기준으로 확장했습니다.</p></article>
+        <article class="evidence-item"><span class="label">DOMAIN EXAMPLE / STRUCTURE</span><blockquote>“One agent could generate candidate topologies ... Another agent could optimize magnetic components ...”</blockquote><p>전문 분야의 사례를 여러 에이전트의 역할로 나누어 설명해 복잡한 시스템을 이해하기 쉽게 만들었습니다.</p></article>
+        <article class="evidence-item"><span class="label">CONCLUSION / SYNTHESIS</span><blockquote>“The distinction between engineer and AI operator will gradually disappear...”</blockquote><p>앞에서 제시한 협업과 책임의 논의를 한 문장으로 종합해 답변을 명확하게 마무리했습니다.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading"><div><p class="label">03 / SCORES</p><h2>점수와 근거</h2></div><span class="confidence">이번 표본에 대한 잠정 점수</span></div>
+      <table class="score-table"><thead><tr><th>영역</th><th>점수</th><th>관찰 근거</th><th>확신도</th></tr></thead><tbody>
+        <tr><td>유창성</td><td class="score">4 / 5</td><td class="evidence">각 답변을 여러 문장으로 확장하고 <strong>However, Meanwhile, In other words</strong> 같은 연결어로 흐름을 유지했습니다.</td><td><span class="tag">중간</span></td></tr>
+        <tr><td>정확성</td><td class="score">4 / 5</td><td class="evidence">복잡한 조건문과 수동적 의미를 안정적으로 사용했습니다. 텍스트 표본만으로 즉흥 발화의 정확성까지는 확인할 수 없습니다.</td><td><span class="tag">중간</span></td></tr>
+        <tr><td>어휘와 표현</td><td class="score">5 / 5</td><td class="evidence"><strong>functional safety, regulatory compliance, system-level objectives, orchestration</strong> 등 분야에 맞는 구체적 어휘를 사용했습니다.</td><td><span class="tag">높음</span></td></tr>
+        <tr><td>상호작용</td><td class="score">4 / 5</td><td class="evidence">AI의 반론과 질문에 직접 응답하고, 주장을 예시와 책임의 관점으로 확장했습니다. 실제 실시간 반응 속도는 평가하지 않았습니다.</td><td><span class="tag">중간</span></td></tr>
+        <tr><td>명료성</td><td class="score">5 / 5</td><td class="evidence">주장 → 조건 → 산업 사례 → 결론의 구조가 분명하고, 독자가 논점을 따라가기 쉽습니다.</td><td><span class="tag">높음</span></td></tr>
+      </tbody></table>
+    </section>
+
+    <section>
+      <div class="section-heading"><div><p class="label">04 / STRENGTHS</p><h2>잘한 점</h2></div></div>
+      <div class="two-column">
+        <article class="strength-card"><span class="strength-number">01</span><h3>추상적인 주장을 실제 책임과 연결함</h3><p>“socially, legally, and commercially acceptable”처럼 기술적 정답을 넘어 조직과 사회가 감당해야 할 기준을 선명하게 제시했습니다.</p></article>
+        <article class="strength-card"><span class="strength-number">02</span><h3>전문 분야의 예시를 단계적으로 구성함</h3><p>고전압 DC-DC 컨버터를 중심으로 토폴로지, 자기 부품, 반도체, 검증 에이전트를 순서 있게 설명했습니다.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading"><div><p class="label">05 / NEXT EDGE</p><h2>다음 단계의 개선점</h2></div><span class="confidence">큰 오류보다 정교화 중심</span></div>
+      <div class="improvement">
+        <article class="improvement-card"><span class="label">01 / 구두 답변의 호흡</span><p class="quote">“Engineers will likely focus more on defining system-level objectives, validating assumptions, and making strategic decisions.”</p><p class="alternative">“Engineers will focus on three things: setting objectives, validating assumptions, and making strategic decisions.”</p><p class="reason">원문도 정확하지만, 실제 말하기에서는 핵심 항목을 먼저 숫자로 묶으면 청자가 긴 문장을 더 쉽게 처리할 수 있습니다.</p></article>
+        <article class="improvement-card"><span class="label">02 / 주장에 짧은 전환 표현 추가</span><p class="quote">“I expect the relationship to become increasingly collaborative rather than competitive.”</p><p class="alternative">“My short answer is that collaboration will replace competition, especially in safety-critical work.”</p><p class="reason">이미 논리가 명확하므로, 답변 첫 문장에 결론을 압축해 제시하면 토론에서 더 즉각적이고 자신 있게 들립니다.</p></article>
+        <article class="improvement-card"><span class="label">03 / 즉흥성 확인하기</span><p class="quote">관찰: 긴 답변을 문어체에 가까운 완성도로 구성함</p><p class="alternative">Practice using shorter spoken units and one-sentence summaries.</p><p class="reason">텍스트 기록만으로는 멈춤과 수정 여부를 알 수 없습니다. 다음에는 같은 답변을 30초 버전과 90초 버전으로 각각 말해 보세요.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading"><div><p class="label">06 / 7-DAY PRACTICE</p><h2>7일 연습 루틴</h2></div><span class="confidence">10–15 MIN / DAY</span></div>
+      <article class="practice-card"><div><p class="label">GOAL</p><h3>복잡한 기술적 관점을 짧고 명료하게 말하기</h3><p>현재 강점인 논리와 전문 어휘를 유지하면서, 구두 토론에 맞는 속도와 압축을 더합니다.</p></div><div><ol class="practice-list"><li>1–2일차: 답변 하나를 골라 핵심 결론을 한 문장으로 먼저 말합니다.</li><li>3–4일차: 같은 답변을 30초로 줄이고, <em>first, however, therefore</em>를 사용합니다.</li><li>5–6일차: AI의 반론을 가정하고 60초 동안 즉석에서 답합니다.</li><li>7일차: 가장 어려웠던 주제로 90초 답변을 녹음하고 스스로 요약합니다.</li></ol><div class="success"><strong>성공 기준:</strong> 60초 답변에서 결론 1개, 근거 2개, 예시 1개를 멈춤 없이 전달하기</div></div></article>
+    </section>
+
+    <section>
+      <p class="label">07 / NEXT QUESTION</p>
+      <p class="question"><span class="label">Answer in English</span>What safeguards should an AI-powered engineering platform include before engineers rely on its recommendations in a safety-critical project?</p>
+    </section>
+
+    <footer><span>SPEAKWISE / TEXT-BASED COACHING</span><span>Generated from the supplied conversation</span></footer>
+  </main>
+</body>
+</html>
