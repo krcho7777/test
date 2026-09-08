@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 대화를 바탕으로 영어 말하기를 진단하고 연습하는 코치">
+  <title>Speakwise | English Speaking Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Speakwise 홈">
+        <span class="brand-mark">S</span>
+        <span>Speakwise</span>
+      </a>
+      <div class="topbar-meta">
+        <span class="status-dot"></span>
+        <span>텍스트 코칭 모드</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro-grid">
+        <div class="intro-copy">
+          <p class="eyebrow">ENGLISH SPEAKING COACH <span>01</span></p>
+          <h1>말한 내용을<br><em>성장 포인트</em>로 바꿔요.</h1>
+          <p class="intro-description">AI와 나눈 영어 대화를 붙여 넣으면, 실제로 반복되는 패턴을 찾아 다음 대화에서 바로 쓸 수 있는 연습으로 정리합니다.</p>
+          <div class="trust-row">
+            <span>근거 중심 분석</span>
+            <span>발음은 음성 없이는 평가하지 않음</span>
+          </div>
+        </div>
+        <div class="signal-card" aria-label="코칭 분석 항목">
+          <div class="signal-header"><span>COACHING SIGNALS</span><span>LIVE</span></div>
+          <div class="signal-line"><span class="signal-index">01</span><span>명료한 문장</span><strong>clarity</strong></div>
+          <div class="signal-line active"><span class="signal-index">02</span><span>반복되는 패턴</span><strong>patterns</strong></div>
+          <div class="signal-line"><span class="signal-index">03</span><span>다음 행동</span><strong>practice</strong></div>
+          <div class="signal-footer"><span class="pulse"></span> 대화를 진단할 준비가 됐어요</div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="대화 입력 및 평가 결과">
+        <div class="panel input-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">STEP 01</p>
+              <h2>대화 기록을 넣어주세요</h2>
+            </div>
+            <button class="text-button" id="sampleButton" type="button">샘플 불러오기 <span>↗</span></button>
+          </div>
+          <div class="field-grid">
+            <label>
+              <span>이번 대화의 목표 <small>OPTIONAL</small></span>
+              <input id="goalInput" type="text" placeholder="예: 회의에서 의견을 자신 있게 말하기">
+            </label>
+            <label>
+              <span>현재 수준 <small>OPTIONAL</small></span>
+              <select id="levelInput">
+                <option value="">잘 모르겠어요</option>
+                <option>A1</option>
+                <option>A2</option>
+                <option>B1</option>
+                <option>B2</option>
+                <option>C1</option>
+              </select>
+            </label>
+          </div>
+          <label class="conversation-field">
+            <span>AI와 나눈 대화 <small>REQUIRED</small></span>
+            <textarea id="conversationInput" rows="9" placeholder="User: I joined the meeting yesterday...&#10;AI: What was the main challenge?&#10;User: ..."></textarea>
+          </label>
+          <div class="input-footer">
+            <span id="charCount">0 characters</span>
+            <button class="primary-button" id="evaluateButton" type="button"><span>대화 평가하기</span><b>→</b></button>
+          </div>
+        </div>
+
+        <div class="panel result-panel" id="resultPanel" aria-live="polite">
+          <div class="empty-result" id="emptyResult">
+            <div class="empty-orbit"><span></span><span></span><span></span></div>
+            <p class="section-kicker">STEP 02</p>
+            <h2>당신의 다음 문장을<br>기다리고 있어요.</h2>
+            <p>대화를 입력하면 강점, 반복 패턴, 그리고 7일 연습 루틴을 보여드릴게요.</p>
+          </div>
+          <div class="result-content hidden" id="resultContent">
+            <div class="result-heading">
+              <div><p class="section-kicker">YOUR SNAPSHOT</p><h2>이번 대화의 스냅샷</h2></div>
+              <span class="level-badge">A2–B1 <small>추정</small></span>
+            </div>
+            <div class="score-grid">
+              <div class="score-main"><span>가장 큰 강점</span><strong>의미를 끝까지 전달해요</strong><p>상황과 원인, 결과를 연결해 설명했습니다.</p></div>
+              <div class="score-ring"><svg viewBox="0 0 42 42"><circle class="ring-bg" cx="21" cy="21" r="15.9"></circle><circle class="ring-value" cx="21" cy="21" r="15.9"></circle></svg><strong>3.0</strong><span>/ 5</span></div>
+            </div>
+            <div class="metrics" id="metrics"></div>
+            <div class="insight-block"><div class="insight-title"><span class="number-tag">01</span><span>이번에 먼저 다듬을 패턴</span></div><div class="correction"><p>“I explain our plan.”</p><b>→</b><p class="corrected">“I explained our plan.”</p><small>yesterday와 함께 쓰이므로 과거형이 필요해요.</small></div></div>
+            <div class="practice-block"><div><p class="section-kicker">7-DAY PRACTICE</p><h3>과거 시제로 업무 상황 말하기</h3></div><div class="practice-detail"><span>10–15 MIN</span><p>매일 어제 있었던 일을 3문장으로 말해보세요. 과거형 동사 4개와 <em>so</em> 또는 <em>because</em>를 사용하면 성공입니다.</p></div></div>
+            <div class="next-question"><span>다음 질문</span><strong>What was the customer’s main misunderstanding?</strong><button type="button" id="copyQuestion">복사</button></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>© 2026 SPEAKWISE</span><span>텍스트 대화 기반 코칭 · 음성 정보 없음</span></footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
