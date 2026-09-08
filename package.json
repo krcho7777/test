@@ -1,0 +1,9 @@
+{
+  "name": "speakwise-coach",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI English speaking coach",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
