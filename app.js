@@ -10,6 +10,14 @@ const evaluateButton = document.querySelector('#evaluateButton');
 const sampleButton = document.querySelector('#sampleButton');
 const copyQuestion = document.querySelector('#copyQuestion');
 
+const demoScores = {
+  fluency: 3,
+  accuracy: 2,
+  vocabulary: 3,
+  interaction: 3,
+  clarity: 3
+};
+
 function updateCount() {
   charCount.textContent = `${conversationInput.value.length.toLocaleString()} characters`;
 }
@@ -37,28 +45,32 @@ async function evaluateConversation() {
 
   evaluateButton.disabled = true;
   evaluateButton.querySelector('span').textContent = '분석하는 중...';
-  try {
-    const response = await fetch('/api/evaluate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        goal: document.querySelector('#goalInput').value,
-        level: document.querySelector('#levelInput').value,
-        conversation: conversationInput.value
-      })
+  setTimeout(() => {
+    renderResult({
+      estimatedLevel: 'A2-B1',
+      averageScore: 3,
+      scores: demoScores,
+      strength: {
+        title: '의미를 끝까지 전달해요',
+        detail: '상황과 원인, 결과를 연결해 설명했습니다.'
+      },
+      correction: {
+        original: 'I explain our plan.',
+        corrected: 'I explained our plan.',
+        reason: 'yesterday와 함께 쓰이므로 과거형이 필요해요.'
+      },
+      practice: {
+        title: '과거 시제로 업무 상황 말하기',
+        detail: '매일 어제 있었던 일을 3문장으로 말해보세요. 과거형 동사 4개와 so 또는 because를 사용하면 성공입니다.'
+      },
+      nextQuestion: 'What was the customer’s main misunderstanding?'
     });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || '평가에 실패했습니다.');
-    renderResult(result);
     emptyResult.classList.add('hidden');
     resultContent.classList.remove('hidden');
-    document.querySelector('#resultPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } catch (error) {
-    window.alert(error.message);
-  } finally {
     evaluateButton.disabled = false;
     evaluateButton.querySelector('span').textContent = '다시 평가하기';
-  }
+    document.querySelector('#resultPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 650);
 }
 
 function renderResult(result) {
